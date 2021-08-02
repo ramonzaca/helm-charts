@@ -127,7 +127,7 @@ postgresql:
     size: "10Gi"
 
 externalDatabase:
-  type: "mysql"
+  type: "postgres"
   host: postgres.example.org
   port: 5432
   database: mlflow
