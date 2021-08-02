@@ -57,7 +57,7 @@ spec:
                   name: {{ include "mlflow.fullname" . }}
                   key: backend-store-uri
             - name: ARTIFACT_ROOT
-              value: {{ .Values.artifactRoot }}
+              value: {{ include "mlflow.artifactStore.artifactRoot" . | quote}}
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
@@ -69,7 +69,7 @@ spec:
                   name: {{ include "mlflow.fullname" . }}
                   key: secret-key
             - name: MLFLOW_S3_ENDPOINT_URL
-              value: {{ include "mlflow.storageHost" . }}
+              value: {{ include "mlflow.artifactStore.storageHost" . | quote }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   repository: kelvinsp/mlflow
   pullPolicy: Always
-  tag: "1.17.0"
+  tag: "1.19.0"
 
 strategy: RollingUpdate
 
@@ -84,6 +84,8 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 
 minio:
+  enabled: true
+
   accessKey:
     # -- MinIO® Access Key
     password: "access-key"
@@ -92,13 +94,25 @@ minio:
     password: "secret-key"
   # -- Comma, semi-colon or space separated list of buckets to create
   defaultBuckets: "mlflow"
+  defaultPath: ""
   # -- MinIO® container port to open
   containerPort: "9000"
   persistence:
     # -- PVC Storage Request for MinIO® data volume
     size: "10Gi"
 
+externalArtifactStore:
+  # NOTE: Only s3 is supported in this chart but others may be added:
+  # Further reading: https://www.mlflow.org/docs/latest/tracking.html#id75
+  type: "s3"
+  bucket: "mlflow"
+  path: "/"
+  accessKey: "access-key"
+  secretKey: "secret-key"
+
 postgresql:
+  enabled: true
+
   # -- PostgreSQL user
   postgresqlUsername: "mlflow-user"
   # -- PostgreSQL user password
@@ -112,8 +126,18 @@ postgresql:
     # -- PVC Storage Request for PostgreSQL volume
     size: "10Gi"
 
-# -- Bucket path to store MLFlow artifacts
-artifactRoot: "s3://mlflow"
+externalDatabase:
+  type: "mysql"
+  host: postgres.example.org
+  port: 5432
+  database: mlflow
+  user: mlflow
+  password: "mlflow-postgres-password"
+
+  # use this for any extra connection-string settings, e.g. ?sslmode=disable
+  properties: ""
+
+# artifactRoot: "s3://mlflow"
 
 nodeSelector: {}
 
