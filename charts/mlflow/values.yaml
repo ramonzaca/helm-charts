@@ -107,8 +107,8 @@ externalArtifactStore:
   type: "s3"
   bucket: "mlflow"
   path: "/"
-  accessKey: "access-key"
-  secretKey: "secret-key"
+  accessKey: ""
+  secretKey: ""
 
 postgresql:
   enabled: true
