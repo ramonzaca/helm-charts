@@ -115,7 +115,6 @@ Database
     {{- $db_conn_password  := .Values.externalDatabase.password -}}
     {{- $db_conn_db := .Values.externalDatabase.database -}}
     {{- $db_conn_properties  := .Values.externalDatabase.properties -}}
-    {{- $db_conn_type  := "" -}}
     {{- if eq "postgres" .Values.externalDatabase.type -}}
         {{- $db_conn_type  := "postgresql+psycopg2" -}}
     {{- else if eq "mysql" .Values.externalDatabase.type -}}
