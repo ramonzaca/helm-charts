@@ -116,9 +116,9 @@ Database
     {{- $db_conn_db := .Values.externalDatabase.database -}}
     {{- $db_conn_properties  := .Values.externalDatabase.properties -}}
     {{- if eq "postgres" .Values.externalDatabase.type -}}
-        {{- printf "postgresql+psycopg2://%s:%s@%s:%s/%s?%s" $db_conn_type $db_conn_user $db_conn_password $db_conn_host $db_conn_port $db_conn_db $db_conn_properties -}}
+        {{- printf "postgresql+psycopg2://%s:%s@%s:%s/%s?%s" $db_conn_user $db_conn_password $db_conn_host $db_conn_port $db_conn_db $db_conn_properties -}}
     {{- else if eq "mysql" .Values.externalDatabase.type -}}
-        {{- printf "mysql+mysqldb://%s:%s@%s:%s/%s?%s" $db_conn_type $db_conn_user $db_conn_password $db_conn_host $db_conn_port $db_conn_db $db_conn_properties -}}
+        {{- printf "mysql+mysqldb://%s:%s@%s:%s/%s?%s" $db_conn_user $db_conn_password $db_conn_host $db_conn_port $db_conn_db $db_conn_properties -}}
     {{- else -}}
         {{- fail "value for .Values.externalDatabase.type must be one of: postgres, mysql" -}}
     {{- end -}}
