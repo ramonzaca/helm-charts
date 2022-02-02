@@ -83,9 +83,6 @@ Artifact Store
 {{- define "mlflow.artifactStore.storageHost" -}}
 {{- if .Values.minio.enabled }}
 {{- printf "http://%s-minio.%s.svc.cluster.local:%s" .Release.Name .Release.Namespace .Values.minio.containerPort }}
-{{- else }}
-{{- printf "" }}
-{{- end }}
 {{- end }}
 
 {{- define "mlflow.artifactStore.artifactRoot" -}}
