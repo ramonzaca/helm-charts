@@ -84,7 +84,7 @@ Artifact Store
 {{- if .Values.minio.enabled }}
 {{- printf "http://%s-minio.%s.svc.cluster.local:%s" .Release.Name .Release.Namespace .Values.minio.containerPort }}
 {{- else }}
-{{- printf "%s://%s/%s" .Values.externalArtifactStore.type .Values.externalArtifactStore.bucket .Values.externalArtifactStore.path }}
+{{- printf "" }}
 {{- end }}
 {{- end }}
 
